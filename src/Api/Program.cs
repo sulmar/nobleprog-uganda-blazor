@@ -30,7 +30,7 @@ app.UseCors();
 
 app.MapGet("api/customers", async (Faker<Customer> faker) =>
 {
-    await Task.Delay(5000); // Simulate a delay for the sake of the example
+    await Task.Delay(1000); // Simulate a delay for the sake of the example
 
     // Generate a list of 100 fake customers
     var customers = faker.Generate(100);
