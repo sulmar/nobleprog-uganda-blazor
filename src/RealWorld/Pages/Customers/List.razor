@@ -2,13 +2,34 @@
 @using RealWorld.Models
 @inject HttpClient Client
 
-
 <h3>List</h3>
 
-<ul>
-    @foreach (var customer in customers)
-    {
-        <li>@customer.FirstName @customer.LastName</li>
-    }
-</ul>
+@if (customers == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (customers.Count == 0)
+{
+    <p>No customers found.</p>
+}
+else
+{
+    <ul>
 
+        @foreach (var customer in customers)
+        {
+            <li>@customer.FirstName @customer.LastName</li>
+        }
+    </ul>
+}
+
+
+
+@code{
+    private List<Customer> customers;
+
+    protected override async Task OnInitializedAsync()
+    {
+        customers = await Client.GetFromJsonAsync<List<Customer>>("api/customers");
+    }
+}

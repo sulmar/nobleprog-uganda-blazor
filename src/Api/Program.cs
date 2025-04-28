@@ -8,6 +8,13 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<Faker<Customer>, CustomerFaker>();
 
+builder.Services.AddCors(options => options.AddDefaultPolicy(policy=>
+{
+    policy.WithOrigins("https://localhost:7032")
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+}));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -19,8 +26,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("api/customers", (Faker<Customer> faker) =>
+app.UseCors();
+
+app.MapGet("api/customers", async (Faker<Customer> faker) =>
 {
+    await Task.Delay(5000); // Simulate a delay for the sake of the example
+
     // Generate a list of 100 fake customers
     var customers = faker.Generate(100);
 
