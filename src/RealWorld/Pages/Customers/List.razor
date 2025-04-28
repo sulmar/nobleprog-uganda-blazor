@@ -1,7 +1,7 @@
 ﻿@page "/customers"
-
-@using RealWorld.Fakers
 @using RealWorld.Models
+@inject HttpClient Client
+
 
 <h3>List</h3>
 
@@ -17,12 +17,12 @@
 
     private List<Customer> customers = new List<Customer>();
 
-    protected override void OnInitialized()
-    {
-        var faker = new CustomerFaker();
+    // [Inject]
+    // private HttpClient Client { get; set; }
 
-        customers = faker.Generate(100);
-
+    protected override async Task OnInitializedAsync()
+    {        
+        customers = await Client.GetFromJsonAsync<List<Customer>>("api/customers");            
     }
 
 }
