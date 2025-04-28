@@ -1,0 +1,28 @@
+﻿@page "/customers"
+
+@using RealWorld.Fakers
+@using RealWorld.Models
+
+<h3>List</h3>
+
+<ul>
+    @foreach (var customer in customers)
+    {
+        <li>@customer.FirstName @customer.LastName</li>
+    }
+</ul>
+
+
+@code {
+
+    private List<Customer> customers = new List<Customer>();
+
+    protected override void OnInitialized()
+    {
+        var faker = new CustomerFaker();
+
+        customers = faker.Generate(100);
+
+    }
+
+}
