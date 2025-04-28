@@ -12,17 +12,3 @@
     }
 </ul>
 
-
-@code {
-
-    private List<Customer> customers = new List<Customer>();
-
-    // [Inject]
-    // private HttpClient Client { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {        
-        customers = await Client.GetFromJsonAsync<List<Customer>>("api/customers");            
-    }
-
-}
