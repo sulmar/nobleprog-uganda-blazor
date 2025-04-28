@@ -3,24 +3,8 @@ using System.Net.Http.Json;
 
 namespace RealWorld.Services;
 
-// Abstract
-public interface ICustomerService
-{
-    Task<List<Customer>> GetAllAsync();
-}
-
 // Concrete
-public class ApiCustomerService : ICustomerService
+public class ApiCustomerService(HttpClient Client) : ICustomerService
 {
-    private HttpClient Client;
-
-    public ApiCustomerService(HttpClient client)
-    {
-        Client = client;
-    }
-
-    public Task<List<Customer>> GetAllAsync()
-    {
-        return Client.GetFromJsonAsync<List<Customer>>("api/customers");
-    }
+    public Task<List<Customer>> GetAllAsync() => Client.GetFromJsonAsync<List<Customer>>("api/customers");   
 }
