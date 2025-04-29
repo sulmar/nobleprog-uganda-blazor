@@ -1,13 +1,14 @@
 ﻿@page "/customers"
 @using RealWorld.Models
 @using RealWorld.Services
+@using RealWorld.Shared
 @inject ICustomerService Api
 
 <h3>List of Customers</h3>
 
 @if (customers == null)
 {
-    <p><em>Loading...</em></p>
+    <LoaderComponent Message="Loading customers..." />
 }
 else if (customers.Count == 0)
 {

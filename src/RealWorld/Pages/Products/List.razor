@@ -1,13 +1,14 @@
 ﻿@page "/products"
 @using RealWorld.Models
 @using RealWorld.Services
+@using RealWorld.Shared
 @inject IProductService Api
 
 <h3>List of Products</h3>
 
 @if (products == null)
 {
-    <p><em>Loading...</em></p>
+    <LoaderComponent Message="Loading products..." />
 }
 else if (products.Count == 0)
 {
