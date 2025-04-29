@@ -1,5 +1,5 @@
 ﻿
-<p><em>@Message</em></p>
+<p class="text-@Theme"><em>@Message</em></p>
 
 @ChildContent
 
@@ -10,5 +10,8 @@
 
     [Parameter] 
     public RenderFragment? ChildContent { get; set; }  // ChildContent - special name
+
+    [CascadingParameter]
+    public string Theme { get; set; } = "light"; // Default value
 
 }
