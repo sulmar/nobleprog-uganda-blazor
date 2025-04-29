@@ -1,15 +1,14 @@
 ﻿
 <p><em>@Message</em></p>
 
-@Content
-
+@ChildContent
 
 @code {
 
     [Parameter, EditorRequired]    
     public required string Message { get; set; } 
 
-    [Parameter]
-    public RenderFragment? Content { get; set; }
+    [Parameter] 
+    public RenderFragment? ChildContent { get; set; }  // ChildContent - special name
 
 }
