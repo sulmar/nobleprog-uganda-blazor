@@ -1,31 +1,13 @@
 ﻿@page "/products"
-@using RealWorld.Models
-@using RealWorld.Services
-@using RealWorld.Shared
 @inject IProductService Api
 
 <h3>List of Products</h3>
 
-@if (products == null)
-{
-    <LoaderComponent Message="Loading products..." />
-}
-else if (products.Count == 0)
-{
-    <p>No products found.</p>
-}
-else
-{
-    <ul>
-
-        @foreach (var product in products)
-        {
-            <li>@product.Name @product.Code @product.Description</li>
-        }
-    </ul>
-}
-
-
+<ListItemsComponent Items="@products" >
+    <ItemTemplate>
+        <li>@context.Code @context.Name @context.Description @context.Price</li>
+    </ItemTemplate>
+</ListItemsComponent>
 
 @code {
 

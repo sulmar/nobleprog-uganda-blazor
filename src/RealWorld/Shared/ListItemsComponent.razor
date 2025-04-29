@@ -1,0 +1,34 @@
+﻿@using RealWorld.Models
+@typeparam T
+
+
+@if (Items == null)
+{
+    <LoaderComponent Message="Loading items...">
+        <img src="https://placehold.co/300x150" />
+    </LoaderComponent>
+}
+else if (Items.Count == 0)
+{
+    <p>No items found.</p>
+}
+else
+{
+    <ul>
+
+        @foreach (var item in Items)
+        {
+            @ItemTemplate(item)
+        }
+    </ul>
+}
+
+@code {
+
+    [Parameter, EditorRequired]
+    public required List<T> Items { get; set;  }    
+
+    [Parameter, EditorRequired]
+    public required RenderFragment<T> ItemTemplate { get; set;  }
+
+}

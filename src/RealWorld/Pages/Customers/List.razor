@@ -1,33 +1,13 @@
 ﻿@page "/customers"
-@using RealWorld.Models
-@using RealWorld.Services
-@using RealWorld.Shared
 @inject ICustomerService Api
 
 <h3>List of Customers</h3>
 
-@if (customers == null)
-{
-    <LoaderComponent Message="Loading customers...">       
-            <img src="https://placehold.co/300x150" />        
-    </LoaderComponent>
-}
-else if (customers.Count == 0)
-{
-    <p>No customers found.</p>
-}
-else
-{
-    <ul>
-
-        @foreach (var customer in customers)
-        {
-            <li>@customer.FirstName @customer.LastName</li>
-        }
-    </ul>
-}
-
-
+<ListItemsComponent Items="@customers">
+    <ItemTemplate>
+        <li>@context.FirstName @context.LastName</li>
+    </ItemTemplate>
+</ListItemsComponent>
 
 @code{
     private List<Customer> customers;
