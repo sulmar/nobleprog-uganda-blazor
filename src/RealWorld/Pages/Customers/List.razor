@@ -3,13 +3,7 @@
 
 <h3 class="text-@Theme">List of Customers</h3>
 
-<div>
-    <form>
-        <label for="searchText">Type search text:</label>
-        <input type="text" id="searchText" />
-        <button type="button" @onclick="@HandleSearch">Search</button>
-    </form>
-</div>
+<SearchPanel ValueChanged="@HandleSearchAsync" />
 
 
 <CascadingValue Value="@Alert" Name="MyAlert">
@@ -45,9 +39,9 @@
 @code {
     private List<Customer> customers;
 
-    private void HandleSearch()
+    private async Task HandleSearchAsync(string text)
     {
-        
+        // TODO: Implement search logic
     }
 
     protected override async Task OnInitializedAsync()

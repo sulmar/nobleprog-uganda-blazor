@@ -1,0 +1,22 @@
+<!-- Search Panel -->
+<div>
+    <form>
+        <label for="searchText">Type search text:</label>
+        <input type="text" id="searchText" @bind-value=@SearchText />
+        <button type="button" @onclick="@HandleSearch">Search</button>
+    </form>
+</div>
+
+
+@code 
+{
+    private string SearchText = string.Empty;
+
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+    private async Task HandleSearch()
+    {
+        await ValueChanged.InvokeAsync(SearchText);
+    }
+}
