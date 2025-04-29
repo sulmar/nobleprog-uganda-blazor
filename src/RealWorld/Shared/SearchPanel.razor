@@ -2,7 +2,7 @@
 <div>
     <form>
         <label for="searchText">Type search text:</label>
-        <input type="text" id="searchText" @bind-value=@SearchText @ref=@searchTextReference />
+        <input type="text" id="searchText" @ref=@searchTextReference @bind=@SearchText @bind:event="oninput" @bind:after=@HandleSearch />
         <button type="button" @onclick="@HandleSearch">Search</button>
     </form>
 </div>
