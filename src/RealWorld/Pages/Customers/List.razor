@@ -3,38 +3,52 @@
 
 <h3 class="text-@Theme">List of Customers</h3>
 
-    <CascadingValue Value="@Alert" Name="MyAlert">
-        
-        <CascadingValue Value="@DefaultMargin">
-
-            <ItemsComponent Items="@customers">
-                <TableTemplate Items="@customers">
-                    <HeaderTemplate>
-                        <tr>
-                            <th>Id</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                        </tr>
-                    </HeaderTemplate>
-
-                    <RowTemplate Context="customer">
-                        <tr>
-                            <td>@customer.Id</td>
-                            <td>@customer.FirstName</td>
-                            <td>@customer.LastName</td>
-                        </tr>
-                    </RowTemplate>
-                </TableTemplate>
-
-            </ItemsComponent>
+<div>
+    <form>
+        <label for="searchText">Type search text:</label>
+        <input type="text" id="searchText" />
+        <button type="button" @onclick="@HandleSearch">Search</button>
+    </form>
+</div>
 
 
-        </CascadingValue>
+<CascadingValue Value="@Alert" Name="MyAlert">
+
+    <CascadingValue Value="@DefaultMargin">
+
+        <ItemsComponent Items="@customers">
+            <TableTemplate Items="@customers">
+                <HeaderTemplate>
+                    <tr>
+                        <th>Id</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                    </tr>
+                </HeaderTemplate>
+
+                <RowTemplate Context="customer">
+                    <tr>
+                        <td>@customer.Id</td>
+                        <td>@customer.FirstName</td>
+                        <td>@customer.LastName</td>
+                    </tr>
+                </RowTemplate>
+            </TableTemplate>
+
+        </ItemsComponent>
+
+
     </CascadingValue>
+</CascadingValue>
 
 
 @code {
     private List<Customer> customers;
+
+    private void HandleSearch()
+    {
+        
+    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -42,8 +56,8 @@
     }
 
     [CascadingParameter(Name = "MyTheme")]
-    public string Theme { get; set; } 
-   
+    public string Theme { get; set; }
+
 
     public Margins DefaultMargin { get; set; } = new Margins { Bottom = 10, Top = 20, Left = 30, Right = 40 };
 
