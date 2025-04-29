@@ -1,0 +1,18 @@
+﻿
+<CascadingValue Value="@Theme" Name="MyTheme">
+
+    @ChildContent
+
+</CascadingValue>
+
+
+
+@code {
+
+    [Parameter]
+    public string Theme { get; set; } = "light";
+
+    [Parameter]
+    public required RenderFragment ChildContent { get; set; }
+
+}
