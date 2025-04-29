@@ -16,4 +16,9 @@ builder.Services.AddHttpClient<ICustomerService, ApiCustomerService>(client =>
     client.BaseAddress = new Uri(baseUrl);
 });
 
+builder.Services.AddHttpClient<IProductService, ApiProductService>(client =>
+{
+    client.BaseAddress = new Uri(baseUrl);
+});
+
 await builder.Build().RunAsync();

@@ -7,6 +7,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<Faker<Customer>, CustomerFaker>();
+builder.Services.AddSingleton<Faker<Product>, ProductFaker>();
 
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy=>
 {
@@ -36,6 +37,14 @@ app.MapGet("api/customers", async (Faker<Customer> faker) =>
     var customers = faker.Generate(100);
 
     return Results.Ok(customers);
+});
+
+app.MapGet("api/products", async(Faker<Product> faker) =>
+{
+    await Task.Delay(1000); // Simulate a delay for the sake of the example
+    // Generate a list of 100 fake products
+    var products = faker.Generate(100);
+    return Results.Ok(products);
 });
 
 

@@ -3,7 +3,7 @@
 namespace RealWorld.Services;
 
 // Abstract
-public interface ICustomerService
+public interface ICustomerService : IEntityService<Customer>
 {
-    Task<List<Customer>> GetAllAsync();
+
 }

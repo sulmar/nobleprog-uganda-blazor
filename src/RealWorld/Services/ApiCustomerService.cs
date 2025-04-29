@@ -8,3 +8,8 @@ public class ApiCustomerService(HttpClient Client) : ICustomerService
 {
     public Task<List<Customer>> GetAllAsync() => Client.GetFromJsonAsync<List<Customer>>("api/customers");   
 }
+
+public class ApiProductService(HttpClient Client) : IProductService
+{
+    public Task<List<Product>> GetAllAsync() => Client.GetFromJsonAsync<List<Product>>("api/products");
+}
