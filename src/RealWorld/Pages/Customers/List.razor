@@ -8,7 +8,11 @@
 
 @if (customers == null)
 {
-    <LoaderComponent Message="Loading customers..." />
+    <LoaderComponent Message="Loading customers...">
+        <Content>
+            <img src="https://placehold.co/300x150" />
+        </Content>
+    </LoaderComponent>
 }
 else if (customers.Count == 0)
 {
