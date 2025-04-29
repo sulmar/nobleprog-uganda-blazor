@@ -3,9 +3,8 @@
 
 <h3 class="text-@Theme">List of Customers</h3>
 
-<CascadingValue Value="@Alert" Name="MyAlert">
-     <CascadingValue Value="@DefaultMargin">
-        <CascadingValue Value="@Theme" Name="MyTheme">       
+    <CascadingValue Value="@Alert" Name="MyAlert">
+        <CascadingValue Value="@DefaultMargin">
 
             <ItemsComponent Items="@customers">
                 <TableTemplate Items="@customers">
@@ -31,7 +30,7 @@
 
         </CascadingValue>
     </CascadingValue>
-</CascadingValue>
+
 
 @code {
     private List<Customer> customers;
@@ -41,8 +40,9 @@
         customers = await Api.GetAllAsync();
     }
 
-    [Parameter]
-    public string Theme { get; set; } = "dark";
+    [CascadingParameter(Name = "MyTheme")]
+    public string Theme { get; set; } 
+   
 
     public int DefaultMargin { get; set; } = 10;
 

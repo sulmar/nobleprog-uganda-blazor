@@ -1,7 +1,7 @@
 ﻿@page "/products"
 @inject IProductService Api
 
-<h3>List of Products</h3>
+<h3 class="text-@Theme">List of Products</h3>
 
 <ItemsComponent Items="@products">   
     <ListTemplate Items="@products">
@@ -24,5 +24,8 @@
     {
         products = await Api.GetAllAsync();
     }
+
+    [CascadingParameter(Name = "MyTheme")]
+    public string Theme { get; set; }
 
 }
