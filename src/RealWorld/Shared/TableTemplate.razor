@@ -1,6 +1,6 @@
 ﻿@typeparam T
 
-<table class="table table-@Theme m-@Margin alert-@Alert">
+<table class="table table-@Theme m-@Margin.Left alert-@Alert">
     <thead>
         @HeaderTemplate
     </thead>
@@ -38,7 +38,7 @@
     public string Theme { get; set; } = "light";
 
     [CascadingParameter]
-    public int Margin { get; set; }
+    public Margins Margin { get; set; }
 
     [CascadingParameter(Name = "MyAlert")]
     public string Alert { get; set; } 

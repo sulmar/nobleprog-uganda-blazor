@@ -4,6 +4,7 @@
 <h3 class="text-@Theme">List of Customers</h3>
 
     <CascadingValue Value="@Alert" Name="MyAlert">
+        
         <CascadingValue Value="@DefaultMargin">
 
             <ItemsComponent Items="@customers">
@@ -44,7 +45,7 @@
     public string Theme { get; set; } 
    
 
-    public int DefaultMargin { get; set; } = 10;
+    public Margins DefaultMargin { get; set; } = new Margins { Bottom = 10, Top = 20, Left = 30, Right = 40 };
 
     public string Alert { get; set; } = "danger";
 }
