@@ -2,7 +2,7 @@
 <div>
     <form>
         <label for="searchText">Type search text:</label>
-        <input type="text" id="searchText" @ref=@searchTextReference @bind=@SearchText @bind:event="oninput" @bind:after=@HandleSearch />
+        <input type="text" id="searchText" @ref=@searchTextReference @bind=@SearchText @onkeydown=@HandleKeyDown />
         <button type="button" @onclick="@HandleSearch">Search</button>
     </form>
 </div>
@@ -17,8 +17,17 @@
     [Parameter]
     public EventCallback<string> ValueChanged { get; set; }
 
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Code == "Space")
+        {
+            await HandleSearch();
+        }
+    }   
+
     private async Task HandleSearch()
     {
+        Console.WriteLine(SearchText);
         await ValueChanged.InvokeAsync(SearchText);
     }
 
