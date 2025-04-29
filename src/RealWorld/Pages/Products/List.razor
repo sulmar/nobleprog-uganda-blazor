@@ -3,11 +3,18 @@
 
 <h3>List of Products</h3>
 
-<ListItemsComponent Items="@products" >
-    <ItemTemplate>
-        <li>@context.Code @context.Name @context.Description @context.Price</li>
-    </ItemTemplate>
-</ListItemsComponent>
+<ItemsComponent Items="@products">   
+    <ListTemplate Items="@products">
+        <ItemTemplate Context="product">
+            <li>
+                <h4>@product.Name</h4>
+                <p>Price: @product.Price</p>
+                <p>Description: @product.Description</p>
+            </li>
+        </ItemTemplate>
+    </ListTemplate>
+        
+</ItemsComponent>
 
 @code {
 

@@ -1,0 +1,19 @@
+﻿@typeparam T
+
+<ul>
+    @foreach (var item in Items)
+    {
+        @ItemTemplate(item)
+    }
+</ul>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public required List<T> Items { get; set; }
+
+
+    [Parameter, EditorRequired]
+    public required RenderFragment<T> ItemTemplate { get; set; }
+
+}

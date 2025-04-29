@@ -14,21 +14,15 @@ else if (Items.Count == 0)
 }
 else
 {
-    <ul>
-
-        @foreach (var item in Items)
-        {
-            @ItemTemplate(item)
-        }
-    </ul>
+    @ChildContent(Items)
 }
 
 @code {
 
     [Parameter, EditorRequired]
-    public required List<T> Items { get; set;  }    
+    public required List<T> Items { get; set; } 
 
-    [Parameter, EditorRequired]
-    public required RenderFragment<T> ItemTemplate { get; set;  }
+    [Parameter]
+    public required RenderFragment<List<T>> ChildContent { get; set; }
 
 }

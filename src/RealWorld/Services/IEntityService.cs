@@ -1,6 +1,5 @@
 ﻿namespace RealWorld.Services;
 
-
 // Generic Types
 
 // Generic Interface = Template for interface 
