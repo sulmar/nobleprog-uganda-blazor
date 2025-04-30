@@ -47,6 +47,8 @@ public class DashboardBackgroundService : BackgroundService
                     // TODO: send the information to the dashboard by SignalR
                     await _hubContext.Clients.All.SendAsync("UpdateDashboard", info, stoppingToken);
 
+                    await _hubContext.Clients.Group("blue").SendAsync("UpdateDashboard", info, stoppingToken);
+
 
                 }
             }

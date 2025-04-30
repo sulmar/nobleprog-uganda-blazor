@@ -4,11 +4,14 @@ namespace Api.Hubs;
 
 public class DashboardHub(ILogger<DashboardHub> logger) : Hub
 {
-    public override Task OnConnectedAsync()
+    public override async Task OnConnectedAsync()
     {
         logger.LogInformation("Client connected: {ConnectionId}", Context.ConnectionId);
 
-        return base.OnConnectedAsync();
+        // hint: you can use the user claims to create groups
+        // var groupName = Context.User.Claims.SingleOrDefault(p => p.Type == "group").Value;
+        // await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+
     }
 
     public override Task OnDisconnectedAsync(Exception? exception)
