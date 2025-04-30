@@ -1,0 +1,78 @@
+﻿@page "/dashboard"
+@using Microsoft.AspNetCore.SignalR.Client
+@implements IAsyncDisposable
+
+<h3>Dashboard</h3>
+
+@if (item==null)
+{
+    <p>waiting for data...</p>
+
+}
+else
+{
+    <article>
+        @item.CustomersCount
+    </article>
+
+    <article>
+        @item.ProductsCount
+    </article>
+
+
+    <article>
+        @item.AvgPrice
+    </article>
+
+
+    <article>
+        @item.SystemStatus
+    </article>
+}
+
+
+@code {
+
+    private DashboardItem? item;
+
+    // dotnet add package Microsoft.AspNetCore.SignalR.Client
+    private HubConnection connection;
+
+    public async ValueTask DisposeAsync()
+    {
+        await connection.StopAsync();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        connection = new HubConnectionBuilder()
+            .WithUrl("https://localhost:7248/signalr/dashboard")
+            .Build();
+
+        connection.On<DashboardItem>("UpdateDashboard", (DashboardItem item) =>
+        {
+            this.item = item;
+            StateHasChanged();
+        });
+
+        await connection.StartAsync();        
+
+        // TODO: get item
+
+        item = new DashboardItem
+            {
+                CustomersCount = 100,
+                ProductsCount = 200,
+                AvgPrice = 50.0d,
+                SystemStatus = SystemStatus.Online
+            };
+
+        
+    }
+
+
+
+    
+
+
+}

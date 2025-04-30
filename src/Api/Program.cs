@@ -1,3 +1,5 @@
+using Api.BackgroundServices;
+using Api.Hubs;
 using Bogus;
 using RealWorld.Fakers;
 using RealWorld.Models;
@@ -16,6 +18,10 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(policy=>
         .AllowAnyMethod();
 }));
 
+builder.Services.AddHostedService<DashboardBackgroundService>();
+
+builder.Services.AddSignalR();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -28,6 +34,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors();
+
+
 
 app.MapGet("api/customers", async (Faker<Customer> faker) =>
 {
@@ -47,6 +55,7 @@ app.MapGet("api/products", async(Faker<Product> faker) =>
     return Results.Ok(products);
 });
 
+app.MapHub<DashboardHub>("/signalr/dashboard");
 
 app.Run();
 
