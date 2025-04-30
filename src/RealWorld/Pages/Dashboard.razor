@@ -1,6 +1,8 @@
 ﻿@page "/dashboard"
+@using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.SignalR.Client
 @implements IAsyncDisposable
+@attribute [Authorize(Roles = "Administrator")]
 
 <h3>Dashboard</h3>
 
