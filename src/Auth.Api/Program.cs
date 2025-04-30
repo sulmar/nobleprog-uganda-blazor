@@ -2,7 +2,17 @@ using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
+{
+    policy.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+}));
+
 var app = builder.Build();
+
+app.UseCors();
 
 app.MapGet("/", () => "Hello Auth.Api!");
 
@@ -13,7 +23,7 @@ app.MapPost("/api/auth/login", (UserCredentials credentials) =>
         var claims = new[]
         {
             new Claim(ClaimTypes.Name, credentials.Username),
-            new Claim(ClaimTypes.Role, "Admin")            
+            new Claim(ClaimTypes.Role, "Admin")
         };
 
         // dotnet add package Microsoft.IdentityModel.JsonWebTokens
@@ -22,7 +32,7 @@ app.MapPost("/api/auth/login", (UserCredentials credentials) =>
 
         var creds = new Microsoft.IdentityModel.Tokens.SigningCredentials(key, Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256);
 
-        var token = new System.IdentityModel.Tokens.Jwt.JwtSecurityToken (
+        var token = new System.IdentityModel.Tokens.Jwt.JwtSecurityToken(
             claims: claims,
             expires: DateTime.Now.AddMinutes(30),
             signingCredentials: creds);
