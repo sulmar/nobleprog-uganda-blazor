@@ -1,12 +1,14 @@
 ﻿@page "/login"
 @using System.ComponentModel.DataAnnotations
+@using FluentValidation
+@using Blazored.FluentValidation
 
 
 <h3>Login</h3>
 
 <EditForm Model="@loginModel" OnValidSubmit="@HandleLoginAsync">
 
-    <DataAnnotationsValidator />
+    <FluentValidationValidator />
 
     <ValidationSummary />
 
@@ -37,20 +39,26 @@
 
     public class LoginModel
     {
-        // Data Annotations
-        [Required, StringLength(maximumLength: 10, MinimumLength = 3)]
         public string Username { get; set; }
-
-        [Required, MinLength(5)]
         public string Password { get; set; }
-
-        [Compare(nameof(Password), ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 
     private async Task HandleLoginAsync()
     {
 
+    }
+
+    // dotnet add package FluentValidation
+    public class LoginModelValidator : AbstractValidator<LoginModel>
+    {
+        public LoginModelValidator()
+        {
+            RuleFor(p => p.Username).NotEmpty().WithMessage("Username is required")
+                .Length(3, 10).WithMessage("Username must be between 3 and 10 characters");
+
+            RuleFor(p => p.Password).NotEmpty().WithMessage("Password is required");
+        }
     }
 
 }
